@@ -38,16 +38,8 @@ class MainController {
         //route the request to the appropriate sub-controller
         switch ($action) {
             case 'init':            //go to the student lookup form.
-                try {
-                    $academicSummaryDao = new AcademicSummaryDaoImpl();
-                    $areaList = $academicSummaryDao->fetchCoreAreasList();
-                    $view = new CoreAreaView();
-                    $view->setAreaList($areaList);
-                    echo $view->output();
-                } catch (Exception $ex) {
-                    $view = new ErrorView();
-                    echo $view->output($ex);
-                }
+                $controller = new CoreAreaController();
+                $controller->do_request(self::$HttpRequest);
                 break;
             
             case 'find-courses':    //user entered GCID to lookup

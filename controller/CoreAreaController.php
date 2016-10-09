@@ -21,23 +21,36 @@ class CoreAreaController {
         //route request
         switch($httpRequest->get_arg('action')) {
             
+            case 'init':
+                try {
+                    $this->academicSummaryDao = new AcademicSummaryDaoImpl();
+                    $areaList = $this->academicSummaryDao->fetchCoreAreasList();
+                    $view = new CoreAreaView();
+                    $view->setAreaList($areaList);
+                    echo $view->output();
+                } catch (Exception $ex) {
+                    $view = new ErrorView();
+                    echo $view->output($ex);
+                }
+                break;
             case 'find-courses':
-                
+                echo "CoreAreaController->do_request(find-courses) <br/>";
+                var_dump($this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('course-area')));
                 //search for courses in user-selected area
 //                $ = $this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('core-area'));
                                 
                 //display view
-                if (empty($alwaysAlertRecord)) {
-                    //could not find student - display error message
-                    $this->view = new LookupView();
-                    $this->view->set_error_message("I'm sorry, but I can't find that student." .
-                            " If you feel this is an error, please check that you are using the correct GCID (929xxxxxx).");
-                    echo $this->view->output();
-                } else {
-                    $this->view = new LookupView();
-                    $this->view->setAlwaysAlertDetail($alwaysAlertRecord);
-                    echo $this->view->output();
-                }
+//                if (empty($alwaysAlertRecord)) {
+//                    //could not find student - display error message
+//                    $this->view = new LookupView();
+//                    $this->view->set_error_message("I'm sorry, but I can't find that student." .
+//                            " If you feel this is an error, please check that you are using the correct GCID (929xxxxxx).");
+//                    echo $this->view->output();
+//                } else {
+//                    $this->view = new LookupView();
+//                    $this->view->setAlwaysAlertDetail($alwaysAlertRecord);
+//                    echo $this->view->output();
+//                }
                 
                 break;
             
