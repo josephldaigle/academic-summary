@@ -53,7 +53,7 @@ class MainController {
                 break;
             
             default:    //user has requested resource that doesn't exist.
-                $view = new LookupView();
+                $view = new CoreAreaView();
                 //$view = new ResourcesNotAvailableView();
                 echo $view->output();
                 break;
