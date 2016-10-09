@@ -1,0 +1,8 @@
+========== Academic Summary change log ==========
+
+
+7.26.2016 - Sam Lifsey
+	- Implemented central css.
+		-New css file located at /css/app_base.css 
+		-pointed app to new css
+		-deleted local project stylesheets
