@@ -13,7 +13,7 @@ class CoreAreaController {
     private $academicSummaryDao;
     
     public function __construct() {
-        $this->AcademicSummaryDao = new AlwaysAlertDaoImpl();
+        $this->AcademicSummaryDao = new AcademicSummaryDaoImpl();
     }
     
     public function do_request($httpRequest) {
@@ -23,9 +23,9 @@ class CoreAreaController {
             
             case 'init':
                 try {
-                    $this->academicSummaryDao = new AcademicSummaryDaoImpl();
                     $areaList = $this->academicSummaryDao->fetchCoreAreasList();
                     $view = new CoreAreaView();
+                    
                     $view->setAreaList($areaList);
                     echo $view->output();
                 } catch (Exception $ex) {
