@@ -54,8 +54,9 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
 //                TODO log statement that db query did not retrieve results
             } else {
 //                $r = oci_fetch_array($stid, OCI_ASSOC);
-                $r = oci_fetch_all($stid, $r, OCI_ASSOC);
-                $r = array_merge($r['AREA'], $r['CODE']);
+                oci_fetch_all($stid, $r);
+//                die(print_r($r));
+                $r = array_combine($r['AREA'], $r['CODE']);
             }
 
             //release connection objects and return false

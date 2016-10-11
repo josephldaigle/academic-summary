@@ -13,7 +13,7 @@ class CoreAreaController {
     private $academicSummaryDao;
     
     public function __construct() {
-        $this->AcademicSummaryDao = new AcademicSummaryDaoImpl();
+        $this->academicSummaryDao = new AcademicSummaryDaoImpl();
     }
     
     public function do_request($httpRequest) {
