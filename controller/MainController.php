@@ -53,10 +53,9 @@ class MainController {
                 break;
             
             default:    //user has requested resource that doesn't exist.
-                $view = new CoreAreaView();
-                //$view = new ResourcesNotAvailableView();
-                echo $view->output();
-                break;
+                header('Location: /joe-dev/academic-summary/?action=init');
+                exit();
+//                break;
         }
     }
 

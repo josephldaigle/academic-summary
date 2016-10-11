@@ -48,11 +48,10 @@ require_once __DIR__ . '/autoload.php';
 //}
 
 
+//    /*========== ROUTING ==========*/
 try {
-    
-//    throw new Exception("Custom exception", 200);
-    $controller = new FrontController();
-    $controller->processRequest();
+    MainController::getInstance();
+    MainController::route();
 } catch (Exception $ex) {
     echo "no exception was thrown";
 //    echo $ex->getMessage();
@@ -60,5 +59,7 @@ try {
 //    echo "<br/>" . $ex->getLine();
 //    echo "<br/>" . $ex->getFile();
 //    echo "<br/>" . $ex->getTraceAsString();
-    var_dump($ex);
+    var_dump($ex->getMessage() . " IN FILE: " . $ex->getFile() . " ON LINE " .
+            $ex->getLine());
 }
+/*=============================*/

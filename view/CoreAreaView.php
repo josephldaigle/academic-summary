@@ -61,13 +61,13 @@ HTML;
                         <label for="course-area">Which area would you like to look in?</label>
                         <select name="course-area">
 HTML;
-             
+        $optionString;
         foreach ($this->areaList as $key => $value) {
             $optionString .= "<option value=\"$value\">$key</option>";
         }
         
         $html .= <<<HTML
-                            $optionString;
+            {$optionString}
                         </select> 
                         
                         <input type="submit" class="button" value="Submit" />

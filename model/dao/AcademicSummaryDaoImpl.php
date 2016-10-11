@@ -35,9 +35,9 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
     public function fetchCoreAreasList() {
         try {
             //query for active student
-            $qry = "SELECT DISTINCT 'Area ' || wascore_core_code area
+            $qry = "SELECT DISTINCT 'Area ' || wascore_core_code area,
                         wascore_core_code code
-                    FROM wascore";
+                    FROM baninst1.wascore";
             
             //Setup prepared statement
             $stid = oci_parse($this->dbConn, $qry);
@@ -53,7 +53,9 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
                 $r =  "Failed to retrieve records from Banner: ";
 //                TODO log statement that db query did not retrieve results
             } else {
-                $r = oci_fetch_array($stid, OCI_ASSOC);
+//                $r = oci_fetch_array($stid, OCI_ASSOC);
+                $r = oci_fetch_all($stid, $r, OCI_ASSOC);
+                $r = array_merge($r['AREA'], $r['CODE']);
             }
 
             //release connection objects and return false
