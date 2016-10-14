@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Always Alert</title>
+        <title>Academic Summary</title>
         <link rel="icon" href="../images/gsc-logo.png" sizes="16x16" type="image/png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
         <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -16,7 +16,7 @@
         </div>
         <div id="wrapper">
 
-            <h1>Always Alert</h1>
+            <h1>Academic Summary</h1>
             <hr />
             <noscript>
                 <i class="fa fa-exclamation-triangle"></i>This application requires that you have JavaScript enabled in your browser.

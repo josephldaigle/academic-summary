@@ -66,8 +66,9 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
             
         } catch (Exception $e) {
             //close connections and return false on error
-            oci_free_statement($stid);
-
+            if (isset($stid)){
+                oci_free_statement($stid);
+            }
             return null;
         }
     }
@@ -118,7 +119,7 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
             //release connection objects and return false
             oci_free_statement($stid);
             
-            return $r;
+            return $resultSet;
             
         } catch (Exception $e) {
             //close connections and return false on error
