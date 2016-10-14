@@ -54,8 +54,9 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
 //                TODO log statement that db query did not retrieve results
             } else {
 //                $r = oci_fetch_array($stid, OCI_ASSOC);
-                $r = oci_fetch_all($stid, $r, OCI_ASSOC);
-                $r = array_merge($r['AREA'], $r['CODE']);
+                oci_fetch_all($stid, $r);
+//                die(print_r($r));
+                $r = array_combine($r['AREA'], $r['CODE']);
             }
 
             //release connection objects and return false
@@ -74,11 +75,11 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
     public function fetchCoreAreaCourses($coreAreaCode) {
         try {
             //query for active student
-            $qry = "SELECT distinct WASCORE_CORE_CODE
-                        , WASCORE_SUBJ_CODE
-                        , WASCORE_CRSE_NUMB
-                        , NVL (a.scbcrse_title, 'No SCACRSE found') Title
-                        , NVL (TO_CHAR(a.SCBCRSE_CREDIT_HR_LOW), 'NA') Credithours
+            $qry = "SELECT distinct WASCORE_CORE_CODE core_code
+                        , WASCORE_SUBJ_CODE subject_code
+                        , WASCORE_CRSE_NUMB course_number
+                        , NVL (a.scbcrse_title, 'No SCACRSE found') title
+                        , NVL (TO_CHAR(a.SCBCRSE_CREDIT_HR_LOW), 'NA') credit_hours
                     FROM wascore, scbcrse a
                     WHERE wascore.wascore_subj_code = a.scbcrse_subj_code(+)
                         AND wascore.wascore_crse_numb = a.scbcrse_crse_numb(+)
@@ -106,7 +107,12 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
                 $r =  "Failed to retrieve records from Banner: ";
 //                TODO log statement that db query did not retrieve results
             } else {
-                $r = oci_fetch_array($stid, OCI_ASSOC);
+//                  $r = oci_fetch_array($stid, OCI_ASSOC);
+                oci_fetch_all($stid, $r);
+//                die(print_r($r));
+                $r = array_combine($r['CORE_CODE'], $r['SUBJECT_CODE'], 
+                        $r['COURSE_NUMBER'], $r['TITLE'], $r['CREDIT_HOURS']
+                        );
             }
 
             //release connection objects and return false

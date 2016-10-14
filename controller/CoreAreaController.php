@@ -13,7 +13,7 @@ class CoreAreaController {
     private $academicSummaryDao;
     
     public function __construct() {
-        $this->AcademicSummaryDao = new AcademicSummaryDaoImpl();
+        $this->academicSummaryDao = new AcademicSummaryDaoImpl();
     }
     
     public function do_request($httpRequest) {
@@ -34,6 +34,7 @@ class CoreAreaController {
                 }
                 break;
             case 'find-courses':
+//                $courseList = $this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('course-area'));
                 echo "CoreAreaController->do_request(find-courses) <br/>";
                 var_dump($this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('course-area')));
                 //search for courses in user-selected area
