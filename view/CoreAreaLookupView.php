@@ -1,11 +1,11 @@
 <?php
 
 /**
- * CoreAreaView.
+ * CoreAreaLookupView.
  *
  * @author Joseph Daigle
  */
-class CoreAreaView extends View{
+class CoreAreaLookupView extends View{
     
     private $errorMessage;
     private $areaList;
