@@ -43,7 +43,7 @@ class MainController {
                 break;
             
             case 'find-courses':    //user entered GCID to lookup
-                $controller = new StudentController();
+                $controller = new CoreAreaController();
                 $controller->do_request(self::$HttpRequest);
                 break;
             

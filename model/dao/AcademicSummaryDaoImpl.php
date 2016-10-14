@@ -66,8 +66,9 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
             
         } catch (Exception $e) {
             //close connections and return false on error
-            oci_free_statement($stid);
-
+            if (isset($stid)){
+                oci_free_statement($stid);
+            }
             return null;
         }
     }
@@ -107,13 +108,14 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
                 $r =  "Failed to retrieve records from Banner: ";
 //                TODO log statement that db query did not retrieve results
             } else {
-                $r = oci_fetch_array($stid, OCI_ASSOC);
+                $resultSet = array();
+                oci_fetch_all($stid, $resultSet, 0, -1, OCI_FETCHSTATEMENT_BY_ROW + OCI_ASSOC);
             }
 
             //release connection objects and return false
             oci_free_statement($stid);
             
-            return $r;
+            return $resultSet;
             
         } catch (Exception $e) {
             //close connections and return false on error

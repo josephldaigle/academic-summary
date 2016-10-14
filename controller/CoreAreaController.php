@@ -24,7 +24,7 @@ class CoreAreaController {
             case 'init':
                 try {
                     $areaList = $this->academicSummaryDao->fetchCoreAreasList();
-                    $view = new CoreAreaView();
+                    $view = new CoreAreaLookupView();
                     
                     $view->setAreaList($areaList);
                     echo $view->output();
@@ -35,10 +35,9 @@ class CoreAreaController {
                 break;
             case 'find-courses':
                 echo "CoreAreaController->do_request(find-courses) <br/>";
-                var_dump($this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('course-area')));
-                //search for courses in user-selected area
-//                $ = $this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('core-area'));
-                                
+                $courses = $this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('course-area'));
+                
+                
                 //display view
 //                if (empty($alwaysAlertRecord)) {
 //                    //could not find student - display error message
