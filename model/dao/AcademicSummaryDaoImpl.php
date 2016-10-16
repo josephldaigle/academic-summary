@@ -37,7 +37,8 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
             //query for active student
             $qry = "SELECT DISTINCT 'Area ' || wascore_core_code area,
                         wascore_core_code code
-                    FROM baninst1.wascore";
+                    FROM baninst1.wascore
+                    ORDER BY code";
             
             //Setup prepared statement
             $stid = oci_parse($this->dbConn, $qry);
@@ -111,15 +112,13 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
 //                  $r = oci_fetch_array($stid, OCI_ASSOC);
                 oci_fetch_all($stid, $r);
 //                die(print_r($r));
-                $r = array_combine($r['CORE_CODE'], $r['SUBJECT_CODE'], 
-                        $r['COURSE_NUMBER'], $r['TITLE'], $r['CREDIT_HOURS']
-                        );
+                
             }
 
             //release connection objects and return false
             oci_free_statement($stid);
             
-            return $resultSet;
+            return $r;
             
         } catch (Exception $e) {
             //close connections and return false on error
