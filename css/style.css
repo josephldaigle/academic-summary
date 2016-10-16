@@ -78,6 +78,12 @@ i.fa-times-circle {
     color: red;
 }
 
+/***** FORMATTING CLASSES *****/
+.center-text {
+    text-align:center;
+}
+/******************************/
+
 /***** PAGES *****/
 
 i.fa-exclamation-triangle {
@@ -92,7 +98,7 @@ fieldset {
     display: inline;
 }
 
-#student-tutorial-form {
+#academic-summary-form {
     clear: both;
     display: inline;
 }
@@ -108,10 +114,6 @@ form label {
 
 form hr {
     margin: 1.5em 0em 1.5em 0em;
-}
-
-input[name=tutor] {
-    margin-top: .5em;
 }
 
 input:not(.button), select {
@@ -140,10 +142,6 @@ input:not(.button), select {
     display: inline-block;
 }
 
-input[name="student-gcid"] {
-    margin-left: 1em;
-}
-
 textarea {
     min-width: 300px;
     min-height: 150px;
@@ -163,37 +161,6 @@ textarea {
 
 #gsc-content>form {
     display: inline-block;
-}
-
-
-img.student-photo {
-    max-width: 110px;
-    border-radius: 10px;
-    border: 1px solid black;
-}
-
-img.student-photo+h2 {
-    display: inline-block;
-    vertical-align: top;
-}
-
-ul.student-snapshot {
-    display: inline-block;
-    list-style: none;
-    padding-left: 0;
-    vertical-align: top;
-    margin: 0;
-    margin-left: 1em;
-}
-
-i.fa-book {
-    display: inline;
-}
-
-span.student-snapshot-label {
-    font-weight: 600;
-    display: inline-block;
-    min-width: 100px;
 }
 
 th, td {
@@ -251,10 +218,4 @@ input.date-input:last-of-type {
     display: inline;
     float: left;
     margin-bottom: 4em;
-}
-
-/***** FACULTY COURSE VIEW SPECIFIC *****/
-
-table[name="enrolled-courses"] th {
-    min-width: 8.5em;
 }

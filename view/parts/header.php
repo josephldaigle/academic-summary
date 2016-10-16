@@ -2,16 +2,17 @@
     <head>
         <meta charset="UTF-8">
         <title>Academic Summary</title>
-        <link rel="icon" href="../images/gsc-logo.png" sizes="16x16" type="image/png" />
+        <link rel="icon" href="https://apps.gordonstate.edu/images/gsc-logo.png" sizes="16x16" type="image/png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
-        <link rel="stylesheet" href="css/style.css" type="text/css" />
-        <link rel="stylesheet" href="css/user-feedback-styles.css" type="text/css" />
+        <link rel="stylesheet" href="https://apps.gordonstate.edu/joe-dev/academic-summary/css/style.css" type="text/css" />
+        <!--<link rel="stylesheet" href="css/user-feedback-styles.css" type="text/css" />-->
+        <link href="https://apps.gordonstate.edu/css/app_base.css" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     </head>
     <body>
         <div id="header">
             <div id="logo">
-                <img src="/images/gogordon.png">
+                <img src="https://apps.gordonstate.edu/images/gogordon.png">
             </div>
         </div>
         <div id="wrapper">
@@ -28,3 +29,7 @@
             
             
             <div id="gsc-content">
+                <ul id="navbar">
+                        <li><a href="#" class="active_nav">Core Area Worksheet</a></li>
+                        <li><a href="#">Major Area Worksheet</a></li>
+                </ul>

@@ -7,17 +7,10 @@
  */
 class CoreAreaLookupView extends View{
     
-    private $errorMessage;
     private $areaList;
   
     public function __construct() {
         parent::__construct();   
-    }
-    
-    public function set_error_message($message) {
-        if (!is_null($message) && !empty($message)) {
-            $this->errorMessage = $message;
-        }
     }
     
     /**
@@ -34,25 +27,14 @@ class CoreAreaLookupView extends View{
         //get the page header
         $html = parent::get_header();
         
-        //check for message to display
-        if (isset($this->errorMessage)) {
-            //inject error messages
-            $html .= <<<HTML
-                    <div class="user-message">
-                        $this->errorMessage
-                    </div>
-HTML;
-        } else {
-            //inject welcome message
-            $html .= <<<HTML
-                    <span></span>
-HTML;
-        }
+            $html .= "<div class=\"user-message\">" .
+                        parent::get_notification();
+                    "</div>";
         
         //inject the content
         $html .= <<<HTML
                 
-                <form id="always-alert-form" method="post" action="./?action=find-courses" >
+                <form id="academic-summary-form" method="post" action="./?action=find-courses" >
 
                 <span class="form-row">
                     <fieldset>
