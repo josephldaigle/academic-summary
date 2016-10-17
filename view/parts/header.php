@@ -30,6 +30,6 @@
             
             <div id="gsc-content">
                 <ul id="navbar">
-                        <li><a href="#" class="active_nav">Core Area Worksheet</a></li>
+                        <li><a href="./?action=init" class="active_nav">Core Area Worksheet</a></li>
                         <li><a href="#">Major Area Worksheet</a></li>
                 </ul>
