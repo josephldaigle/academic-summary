@@ -20,7 +20,7 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
             require_once($connection_file);
             
             //fetch connection object
-            $this->dbConn = dbConnect('read');
+            $this->dbConn = dbConnectTest('read');
             if (!$this->dbConn) {
                 throw new Exception(oci_error());
             }
@@ -89,7 +89,7 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
                         AND (a.scbcrse_eff_term = (SELECT MAX (b.scbcrse_eff_term)
                                                         FROM scbcrse b
                                                         WHERE b.scbcrse_subj_code = a.scbcrse_subj_code
-                                                            AND b.scbcrse_crse_numb = a.scbcrse_crse_numb)
+                                                        AND b.scbcrse_crse_numb = a.scbcrse_crse_numb)
                             OR a.scbcrse_eff_term IS NULL)
                     ORDER BY WASCORE_SUBJ_CODE, WASCORE_CRSE_NUMB";
             
@@ -127,6 +127,84 @@ class AcademicSummaryDaoImpl implements AcademicSummaryDao{
             return null;
         }
     }
+    
+    public function fetchCourseSubjectCodes() {
+        try {
+            //query for active student
+            $qry = "SELECT DISTINCT a.scbcrse_subj_code subject_code
+                    FROM scbcrse a
+                    WHERE a.scbcrse_eff_term = (SELECT MAX (b.scbcrse_eff_term) 
+                                                FROM scbcrse b 
+                                                WHERE  b.scbcrse_subj_code = a.scbcrse_subj_code 
+                                                AND b.scbcrse_crse_numb = a.scbcrse_crse_numb)
+                    ORDER BY subject_code";
+            
+            //Setup prepared statement
+            $stid = oci_parse($this->dbConn, $qry);
+                      
+            //execute query
+            $r = oci_execute($stid);
+            
+            //return false if query fails to commit
+            if (!$r) {
+                $r =  "Failed to retrieve records from Banner: ";
+//                TODO log statement that db query did not retrieve results
+            } else {
+                oci_fetch_all($stid, $r);
+            }
 
-//put your code here
+            //release connection objects and return false
+            oci_free_statement($stid);
+            
+            return $r;
+            
+        } catch (Exception $e) {
+            //close connections and return false on error
+            oci_free_statement($stid);
+
+            return null;
+        }
+    }
+    
+    public function fetchCourseNumbersList($subjectCode) {
+        try {
+            //query for active student
+            $qry = "SELECT a.scbcrse_crse_numb course_number
+                    From scbcrse a 
+                    WHERE a.SCBCRSE_EFF_TERM = (SELECT MAX(b.SCBCRSE_EFF_TERM) 
+                                                FROM scbcrse b 
+                                                WHERE b.SCBCRSE_SUBJ_CODE = a.scbcrse_subj_code 
+                                                AND b.SCBCRSE_CRSE_NUMB = a.scbcrse_crse_numb) 
+                    AND a.scbcrse_subj_code = :SUBJ_CODE
+                    ORDER BY course_number";
+            
+            //Setup prepared statement
+            $stid = oci_parse($this->dbConn, $qry);
+          
+            //bind data to query object
+            oci_bind_by_name($stid, ':SUBJECT_CODE', $subjectCode);
+            
+            //execute query
+            $r = oci_execute($stid);
+            
+            //return false if query fails to commit
+            if (!$r) {
+                $r =  "Failed to retrieve records from Banner: ";
+//                TODO log statement that db query did not retrieve results
+            } else {
+                oci_fetch_all($stid, $r);
+            }
+
+            //release connection objects and return false
+            oci_free_statement($stid);
+            
+            return $r;
+            
+        } catch (Exception $e) {
+            //close connections and return false on error
+            oci_free_statement($stid);
+
+            return null;
+        }
+    }
 }

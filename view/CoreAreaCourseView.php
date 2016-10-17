@@ -44,7 +44,7 @@ class CoreAreaCourseView extends View
         //inject the content
         $html .= <<<HTML
                 
-                <form id="always-alert-form" method="post" action="./?action=find-courses" >
+                <form id="academic-summary-form" method="post" action="./?action=find-courses" >
 
                 <span class="form-row">
                     <fieldset>
@@ -73,6 +73,9 @@ HTML;
                 </span>
             </form>
 HTML;
+        //insert add row link
+        $html .= "<p><a href=\"./?action=add-core-course&course-area={$this->selectedArea}\">+ Add a course</a><p>";
+            
         $html .= <<<HTML
                 <table class="output_table" summary="table displaying core area
                 course requirements" dir="ltr">

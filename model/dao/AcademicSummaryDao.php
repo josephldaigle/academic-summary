@@ -11,5 +11,14 @@ interface AcademicSummaryDao {
      */
     public function fetchCoreAreasList();
     
+    /**
+     * Fetches courses assigned to $coreAreaCode.
+     * @param type $coreAreaCode
+     */
     public function fetchCoreAreaCourses($coreAreaCode);
+    
+    
+    public function fetchCourseSubjectCodes();
+    
+    public function fetchCourseNumbersList($subjectCode);
 }

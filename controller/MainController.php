@@ -40,17 +40,22 @@ class MainController {
             case 'init':            //go to the student lookup form.
                 $controller = new CoreAreaController();
                 $controller->do_request(self::$HttpRequest);
-                break;
+            break;
             
             case 'find-courses':    //user entered GCID to lookup
                 $controller = new CoreAreaController();
                 $controller->do_request(self::$HttpRequest);
-                break;
+            break;
             
-            case 'access-denied':   //user cannot pass authentication
+            case 'add-core-course':      //user wants to add a course
+                $controller = new CoreAreaController();
+                $controller->do_request(self::$HttpRequest);
+            break;
+            
+        case 'access-denied':   //user cannot pass authentication
                 $view = new AccessDeniedView();
                 echo $view->output();
-                break;
+            break;
             
             default:    //user has requested resource that doesn't exist.
                 header('Location: /joe-dev/academic-summary/?action=init');

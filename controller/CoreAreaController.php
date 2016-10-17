@@ -35,31 +35,38 @@ class CoreAreaController {
                 break;
             case 'find-courses':
                 $courseList = $this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('course-area'));
-//                $courses = $this->academicSummaryDao->fetchCoreAreaCourses($httpRequest->get_arg('course-area'));
+                
+                $areaList = $this->academicSummaryDao->fetchCoreAreasList();
 
                 //display view
                 if (empty($courseList['CORE_CODE'])) {
-                    //could not find student - display error message
-                    $areaList = $this->academicSummaryDao->fetchCoreAreasList();
                     $this->view = new CoreAreaLookupView();
                     $this->view->setAreaList($areaList);
                     $this->view->set_notification("No records were returned.");
                     echo $this->view->output();
                 }
-                $areaList = $this->academicSummaryDao->fetchCoreAreasList();
                 $this->view = new CoreAreaCourseView();
                 $this->view->setAreaList($areaList);
                 $this->view->setCourseList($courseList);
                 $this->view->setSelectedArea($httpRequest->get_arg('course-area'));
                 echo $this->view->output();
                 
-                
                 break;
-            
+            case 'add-core-course':
+                $this->view = new AddCoreCourseView();
+                
+                $this->view->setSelectedArea($httpRequest->get_arg('course-area'));
+                $this->view->setAreaList($this->academicSummaryDao->fetchCoreAreasList());
+                $this->view->setSubjectList($this->academicSummaryDao->fetchCourseSubjectCodes());
+//                $this->view->setCourseNumberList($this->academicSummaryDao->fetchCourseNumberList($subjectCode));
+                
+                echo $this->view->output();
+            break;
+        
             default:
                 $this->view = new ResourcesNotAvailableView();
                 echo $this->view->output();
-                break;
+            break;
         }
     }
 }

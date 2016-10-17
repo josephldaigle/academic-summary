@@ -12,8 +12,7 @@ abstract class View {
     
     public function __construct() {
         $this->header = file_get_contents('view/parts/header.php');
-//        $this->footer = file_get_contents('view/parts/footer.php');
-        $this->footer = "</div></div></body></html>";
+        $this->footer = file_get_contents('view/parts/footer.php');
     }
     
     public function get_header() {
